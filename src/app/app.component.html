@@ -1,10 +1,10 @@
-<app-header></app-header>
+<app-header (requestRecipes)="showRecipes($event)" (requestShoppingList)="showShoppingList($event)"></app-header>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <br />
-            <app-recipes></app-recipes>
-            <app-shopping-list></app-shopping-list>
+            <app-recipes *ngIf="currentPage === 'RECIPES'"></app-recipes>
+            <app-shopping-list *ngIf="currentPage === 'SHOPPING'"></app-shopping-list>
         </div>
     </div>
 </div>
