@@ -21,11 +21,14 @@ export class ShoppingListComponent implements OnInit {
 
   }
 
-  addItem({name, amount}) {
-    this.ingredients.push(new Ingredient(name, amount));
+  addItem(ingredient: Ingredient) {
+    if (ingredient.name.trim().length > 0 && ingredient.amount > 0) {
+      this.ingredients.push(ingredient);
+    }
   }
 
   clearItemList() {
+    delete this.ingredients;
     this.ingredients = [];
   }
 
@@ -39,7 +42,10 @@ export class ShoppingListComponent implements OnInit {
       }
     });
 
-    this.ingredients.splice(flag, 1);
+    if (flag > -1) {
+      this.ingredients.splice(flag, 1);
+    }
+
 
   }
 

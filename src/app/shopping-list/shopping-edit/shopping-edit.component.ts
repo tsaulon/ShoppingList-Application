@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Ingredient } from '../../shared/ingredient.model';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -8,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 export class ShoppingEditComponent implements OnInit {
 
-  @Output() requestAdd = new EventEmitter<{name: string, amount: number}>();
+  @Output() requestAdd = new EventEmitter<Ingredient>();
   @Output() requestClear = new EventEmitter();
   @Output() requestDelete = new EventEmitter<string>();
 
@@ -19,7 +20,7 @@ export class ShoppingEditComponent implements OnInit {
   }
 
   requestAddItem(itemName: HTMLInputElement, itemAmount: HTMLInputElement) {
-    this.requestAdd.emit({name: itemName.value, amount: <number><any>itemAmount.value});
+    this.requestAdd.emit(new Ingredient(itemName.value, <number><any>itemAmount.value));
   }
 
   requestClearItemList() {
