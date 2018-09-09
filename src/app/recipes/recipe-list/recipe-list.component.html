@@ -6,7 +6,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12 clearfix" *ngFor="let recipe of recipes">
-        <!-- [recipe] of *ngFor references 'recipe' inside app-recipe-item module. -->
-        <app-recipe-item [recipe]="recipe"></app-recipe-item>
+        <!-- [recipe] of *ngFor binds and references 'recipe' inside app-recipe-item module. -->
+        <app-recipe-item [recipe]="recipe" (detailsRequested)="showDetails($event)"></app-recipe-item>
     </div>
 </div>
