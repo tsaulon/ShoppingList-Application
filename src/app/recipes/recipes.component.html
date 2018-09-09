@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-6">
-      <app-recipe-list (detailsPassed)="showDetails($event)"></app-recipe-list>
+      <!-- assign event data to currRecipeDetails-->
+      <app-recipe-list (detailsPassed)="currRecipeDetails = $event"></app-recipe-list>
   </div>
   <div class="col-md-6">
       <app-recipe-details [recipeDetails]="currRecipeDetails"></app-recipe-details>
