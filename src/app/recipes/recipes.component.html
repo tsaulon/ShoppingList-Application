@@ -4,6 +4,9 @@
       <app-recipe-list (detailsPassed)="currRecipeDetails = $event"></app-recipe-list>
   </div>
   <div class="col-md-6">
-      <app-recipe-details [recipeDetails]="currRecipeDetails"></app-recipe-details>
+      <app-recipe-details *ngIf="currRecipeDetails; else infoText" [recipeDetails]="currRecipeDetails"></app-recipe-details>
+      <ng-template #infoText>
+        <p>Please select a recipe!</p>
+      </ng-template>
   </div>
 </div>
