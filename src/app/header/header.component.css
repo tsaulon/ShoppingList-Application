@@ -5,3 +5,7 @@
 .nav-link, .navbar-brand{
     color: white;
 }
+
+.open > ul{
+  display: block;
+}
