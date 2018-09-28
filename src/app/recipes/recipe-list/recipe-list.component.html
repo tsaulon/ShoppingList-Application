@@ -5,7 +5,7 @@
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-12 clearfix" *ngFor="let recipe of recipes">
+    <div class="col-md-12 clearfix" *ngFor="let recipe of recipes;" >
         <!-- [recipe] of *ngFor binds and references 'recipe' inside app-recipe-item module. -->
         <app-recipe-item [recipe]="recipe"></app-recipe-item>
     </div>

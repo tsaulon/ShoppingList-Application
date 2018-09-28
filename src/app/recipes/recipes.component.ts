@@ -10,14 +10,16 @@ import { Recipe } from './recipe.model';
 })
 export class RecipesComponent implements OnInit {
 
-  currRecipeDetails: Recipe;
+  private currRecipe: Recipe;
 
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.recipeService.recipeSelected
-    .subscribe((recipe: Recipe) => {
-      this.currRecipeDetails = recipe;
+
+    this.recipeService.recipeSelected.subscribe((recipe: Recipe) => {
+      console.log(`recipe: Intercepting ${recipe.name}`)
+      this.currRecipe = recipe;
     })
+
   }
 }

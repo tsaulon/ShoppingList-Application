@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-6">
       <!-- assign event data to currRecipeDetails-->
-      <app-recipe-list (detailsPassed)="currRecipeDetails = $event"></app-recipe-list>
+      <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-6">
-      <app-recipe-details *ngIf="currRecipeDetails; else infoText" [recipeDetails]="currRecipeDetails"></app-recipe-details>
+      <app-recipe-details *ngIf="currRecipe; else infoText" [recipeDetails]="currRecipe"></app-recipe-details>
       <ng-template #infoText>
         <p>Please select a recipe!</p>
       </ng-template>
