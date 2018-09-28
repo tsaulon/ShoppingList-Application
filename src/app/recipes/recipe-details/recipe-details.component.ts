@@ -20,9 +20,7 @@ export class RecipeDetailsComponent implements OnInit {
    }
 
    ingredientsToShoppingList() {
-     this.recipeDetails.ingredients.forEach(ingredient => {
-       this.shoppingListService.addIngredient(ingredient);
-     })
+     this.shoppingListService.ingredients.push(...this.recipeDetails.ingredients);
    }
 
 }
