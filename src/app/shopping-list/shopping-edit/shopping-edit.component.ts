@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../../shared/shoppinglist.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -9,26 +10,24 @@ import { Ingredient } from '../../shared/ingredient.model';
 
 export class ShoppingEditComponent implements OnInit {
 
-  @Output() requestAdd = new EventEmitter<Ingredient>();
-  @Output() requestClear = new EventEmitter();
-  @Output() requestDelete = new EventEmitter<string>();
+  @ViewChild('nameInput') nameInputRef: ElementRef;
+  @ViewChild('amountInput') amountInputRef: ElementRef; 
 
-
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
   }
 
-  requestAddItem(itemName: HTMLInputElement, itemAmount: HTMLInputElement) {
-    this.requestAdd.emit(new Ingredient(itemName.value, <number><any>itemAmount.value));
+  requestAddItem() {
+    this.shoppingListService.requestAdd.emit(new Ingredient(this.nameInputRef.nativeElement.value, <number><any>this.amountInputRef.nativeElement.value));
   }
 
   requestClearItemList() {
-    this.requestClear.emit();
+    this.shoppingListService.requestClear.emit();
   }
 
-  requestDeleteItem(itemName: HTMLInputElement) {
-    this.requestDelete.emit(itemName.value);
+  requestDeleteItem() {
+    this.shoppingListService.requestDelete.emit(this.nameInputRef.nativeElement.value);
   }
 
 }

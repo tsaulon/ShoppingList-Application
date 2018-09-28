@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingListService } from '../shared/shoppinglist.service';
 import { Ingredient } from '../shared/ingredient.model';
 
 @Component({
@@ -10,43 +11,32 @@ export class ShoppingListComponent implements OnInit {
 
   ingredients: Ingredient[];
 
-  constructor() {
-    this.ingredients = [
-      new Ingredient('Beef', 5),
-      new Ingredient('Collard Greens', 3)
-    ];
+  constructor(private shoppingListService: ShoppingListService) {
+
   }
 
   ngOnInit() {
 
-  }
+    this.ingredients = this.shoppingListService.getIngredients();
 
-  addItem(ingredient: Ingredient) {
-    if (ingredient.name.trim().length > 0 && ingredient.amount > 0) {
-      this.ingredients.push(ingredient);
-    }
-  }
+    this.shoppingListService.ingredientsChanged.subscribe((ingredients: Ingredient[]) => {
+      this.ingredients = ingredients;
+    })
+    
+    // Listen for event requestAdd...
+    this.shoppingListService.requestAdd.subscribe((ingredient: Ingredient) => {
+      if (ingredient.name.trim().length > 0 && ingredient.amount > 0) {
+        this.shoppingListService.addIngredient(ingredient);
+      }    })
 
-  clearItemList() {
-    delete this.ingredients;
-    this.ingredients = [];
-  }
+    //Listen for event requestClear...
+    this.shoppingListService.requestClear.subscribe(() => {
+      this.shoppingListService.clearIngredientList();
+    })
 
-  deleteItem(name) {
-
-    let flag = -1;
-
-    this.ingredients.forEach((item, index) => {
-      if (name.toUpperCase() ===  item.name.toUpperCase()) {
-        flag = index;
-      }
-    });
-
-    if (flag > -1) {
-      this.ingredients.splice(flag, 1);
-    }
-
-
+    this.shoppingListService.requestDelete.subscribe((name: string) => {
+      this.shoppingListService.deleteIngredient(name);
+    })
   }
 
 }
